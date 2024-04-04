@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group = 'io.github'
+version = 'master'
+sourceCompatibility = '11'
+
+dependencies {
+
+    compileOnly 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+    implementation group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
+    implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.5"
+}

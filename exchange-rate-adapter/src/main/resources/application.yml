@@ -1,0 +1,29 @@
+server:
+  port: 8081
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: basic
+
+adapter:
+  client:
+    exchange-rate:
+      url: "https://v6.exchangerate-api.com/v6/"
+      api-key: "63a81d357cfb6de9f26cfed9"
+
+logbook:
+  predicate:
+    exclude:
+      - path: /health
+      - path: /prometheus
+  filter.enabled: true
+  secure-filter.enabled: true
+  format.style: http
+  obfuscate:
+    headers:
+      - Authorization
+      - X-Secret
