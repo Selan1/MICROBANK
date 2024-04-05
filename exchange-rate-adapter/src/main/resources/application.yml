@@ -12,8 +12,8 @@ feign:
 adapter:
   client:
     exchange-rate:
-      url: "https://v6.exchangerate-api.com/v6/"
-      api-key: "63a81d357cfb6de9f26cfed9"
+      url: "https://api.fxratesapi.com/"
+      api-key: "fxr_live_caae3d32b9d16deaa1b898fdc43d3e23b7d6"
 
 logbook:
   predicate:

@@ -21,7 +21,7 @@ public class RateHistoryDate {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private LocalDate actualDate;
+    private String actualDate;
 
     @OneToMany
     @JoinColumn(name = "history_date_id")
