@@ -8,9 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @FeignClient(name = "exchangeApiClient", url = "${adapter.client.exchange-rate.url}")
 public interface ExchangeRateApiClient {
-    //https://api.fxratesapi.com/latest?base=USD&format=json
-    @GetMapping(value = "latest?base={currency}&format=json")
-    ExchangeRateApiResponse getActualRates(@PathVariable String currency);
+
+    @GetMapping(value = "/{apiKey}/latest/{currency}")
+    ExchangeRateApiResponse getActualRates(@PathVariable String apiKey,
+                                           @PathVariable String currency);
 
     @GetMapping(value = "/{apiKey}/history/{currency}/{year}/{month}/{day}")
     ExchangeRateApiResponse getHistoricalRates(@PathVariable String apiKey,

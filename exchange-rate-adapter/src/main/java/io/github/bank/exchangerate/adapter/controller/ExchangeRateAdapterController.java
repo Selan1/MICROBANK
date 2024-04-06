@@ -2,6 +2,7 @@ package io.github.bank.exchangerate.adapter.controller;
 
 import io.github.bank.common.dto.ConversionResult;
 import io.github.bank.common.dto.ExchangeRates;
+import io.github.bank.common.dto.HistoryResult;
 import io.github.bank.exchangerate.adapter.service.ExchangeRateAdapterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -29,9 +30,9 @@ public class ExchangeRateAdapterController {
     }
 
     @GetMapping("/history")
-    public List<ExchangeRates> getHistoricalExchangeRate(@RequestParam String currency,
-                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate dateFrom,
-                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate dateTo) {
+    public HistoryResult getHistoricalExchangeRate(@RequestParam String currency,
+                                                   @RequestParam String dateFrom,
+                                                   @RequestParam String dateTo) {
         return rateAdapterService.getHistoricalRates(currency, dateFrom, dateTo);
     }
 

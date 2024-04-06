@@ -25,12 +25,13 @@ public class ExchangeRateAdapterService {
     private String apiKey;
 
     public ExchangeRates getActualRates(String baseCurrency) {
-        var actualRates = client.getActualRates(baseCurrency);
+        var actualRates = client.getActualRates(apiKey, baseCurrency);
 
+        var actualizationDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(actualRates.getLastUpdatedUnix()), ZoneId.of("UTC"));
 
         return ExchangeRates.builder()
                 .baseCurrency(actualRates.getBaseCode())
-                .rateDate(actualRates.getDate())
+                .rateDate(actualizationDateTime.toLocalDate())
                 .exchangeRates(actualRates.getRates())
                 .build();
     }
@@ -50,7 +51,7 @@ public class ExchangeRateAdapterService {
 
             exchangeRates.add(ExchangeRates.builder()
                     .baseCurrency(historyDailyRate.getBaseCode())
-//                    .rateDate(actualizationDateTime.toLocalDate())
+                    .rateDate(actualizationDateTime.toLocalDate())
                     .exchangeRates(historyDailyRate.getRates())
                     .build());
 
