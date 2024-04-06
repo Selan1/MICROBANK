@@ -11,8 +11,8 @@ public interface ExchangeRateApiClient {
     //https://api.fxratesapi.com/latest?base=USD&format=json
     @GetMapping(value = "latest?base={currency}&format=json")
     ExchangeRateApiResponse getActualRates(@PathVariable String currency);
-
-    @GetMapping(value = "/{apiKey}/history/{currency}/{year}/{month}/{day}")
+//"https://api.fxratesapi.com/historical?api_key=fxr_demo_asdiksd21&date=2020-01-01&base=USD"
+    @GetMapping(value = "historical?api_key={apiKey}&format=json&date={year}-{month}-{day}&base={currency}")
     ExchangeRateApiResponse getHistoricalRates(@PathVariable String apiKey,
                                                @PathVariable String currency,
                                                @PathVariable String year,

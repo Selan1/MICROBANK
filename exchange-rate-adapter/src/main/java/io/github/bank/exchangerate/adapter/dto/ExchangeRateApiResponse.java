@@ -15,11 +15,17 @@ public class ExchangeRateApiResponse {
     @JsonProperty("terms")
     private String termsOfUse;
 
-    @JsonProperty("time_last_update_unix")
-    private Long lastUpdatedUnix;
+    @JsonProperty("timestamp")
+    private String timestamp;
 
     @JsonProperty("time_next_update_unix")
     private Long nextUpdateUnix;
+
+    private Integer year;
+
+    private Integer month;
+
+    private Integer day;
 
     @JsonProperty("date")
     private String date;

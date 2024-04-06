@@ -6,7 +6,9 @@ import io.github.bank.exchangerate.adapter.client.ExchangeRateApiClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -35,26 +37,36 @@ public class ExchangeRateAdapterService {
                 .build();
     }
 
-    public List<ExchangeRates> getHistoricalRates(String baseCurrency, LocalDate dateFrom, LocalDate dateTo) {
-        if (dateFrom.isAfter(dateTo)) return List.of();
+    public List<ExchangeRates> getHistoricalRates(String baseCurrency, String dateFrom, String dateTo) {
+        LocalDateTime DateF = LocalDateTime.parse(dateFrom, DateTimeFormatter.ISO_DATE_TIME);
+        LocalDateTime DateT = LocalDateTime.parse(dateTo, DateTimeFormatter.ISO_DATE_TIME);
+        LocalDate dateF = DateF.toLocalDate();
+        LocalDate dateT = DateT.toLocalDate();
+
+        if (dateF.isAfter(dateT)) return List.of();
 
         var exchangeRates = new ArrayList<ExchangeRates>();
-        while (dateFrom.isBefore(dateTo) || dateFrom.isEqual(dateTo)) {
+        while (dateF.isBefore(dateT) || dateF.isEqual(dateT)) {
 
-            var historyDailyRate = client.getHistoricalRates(apiKey, baseCurrency,
-                    String.valueOf(dateFrom.getYear()),
-                    String.valueOf(dateFrom.getMonthValue()),
-                    String.valueOf(dateFrom.getDayOfMonth()));
+            var historyDailyRate = client.getHistoricalRates(
+                    apiKey,
+                    baseCurrency,
+                    String.valueOf(dateF.getYear()),
+                    String.valueOf(dateF.getMonthValue()),
+                    String.valueOf(dateF.getDayOfMonth()));
 
-            var actualizationDateTime = LocalDateTime.ofInstant(Instant.ofEpochMilli(historyDailyRate.getLastUpdatedUnix()), ZoneId.of("UTC"));
+            String dateString = historyDailyRate.getDate();
+
+            // Преобразование строки в объект типа Instant
+
 
             exchangeRates.add(ExchangeRates.builder()
                     .baseCurrency(historyDailyRate.getBaseCode())
-//                    .rateDate(actualizationDateTime.toLocalDate())
+                    .rateDate(historyDailyRate.getTimestamp())
                     .exchangeRates(historyDailyRate.getRates())
                     .build());
 
-            dateFrom = dateFrom.plusDays(1);
+            dateF = dateF.plusDays(1);
         }
 
         return exchangeRates;

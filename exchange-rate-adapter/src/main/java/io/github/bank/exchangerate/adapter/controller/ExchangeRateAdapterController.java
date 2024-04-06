@@ -30,8 +30,8 @@ public class ExchangeRateAdapterController {
 
     @GetMapping("/history")
     public List<ExchangeRates> getHistoricalExchangeRate(@RequestParam String currency,
-                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate dateFrom,
-                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate dateTo) {
+                                                         @RequestParam String dateFrom,
+                                                         @RequestParam String dateTo) {
         return rateAdapterService.getHistoricalRates(currency, dateFrom, dateTo);
     }
 
