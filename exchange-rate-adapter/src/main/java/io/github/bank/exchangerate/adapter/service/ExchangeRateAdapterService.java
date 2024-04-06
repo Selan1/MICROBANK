@@ -38,10 +38,8 @@ public class ExchangeRateAdapterService {
     }
 
     public List<ExchangeRates> getHistoricalRates(String baseCurrency, String dateFrom, String dateTo) {
-        LocalDateTime DateF = LocalDateTime.parse(dateFrom, DateTimeFormatter.ISO_DATE_TIME);
-        LocalDateTime DateT = LocalDateTime.parse(dateTo, DateTimeFormatter.ISO_DATE_TIME);
-        LocalDate dateF = DateF.toLocalDate();
-        LocalDate dateT = DateT.toLocalDate();
+        LocalDate dateF = LocalDate.parse(dateFrom);;
+        LocalDate dateT = LocalDate.parse(dateTo);;
 
         if (dateF.isAfter(dateT)) return List.of();
 
@@ -55,9 +53,6 @@ public class ExchangeRateAdapterService {
                     String.valueOf(dateF.getMonthValue()),
                     String.valueOf(dateF.getDayOfMonth()));
 
-            String dateString = historyDailyRate.getDate();
-
-            // Преобразование строки в объект типа Instant
 
 
             exchangeRates.add(ExchangeRates.builder()
@@ -76,9 +71,9 @@ public class ExchangeRateAdapterService {
         var conversionResult = client.convert(apiKey, fromCurrency, toCurrency, amount);
 
         return ConversionResult.builder()
-                .fromCurrency(conversionResult.getBaseCode())
-                .toCurrency(conversionResult.getTargetCode())
-                .conversionRate(conversionResult.getConversationRate())
+                .fromCurrency(conversionResult.getTargetFrom())
+                .toCurrency(conversionResult.getTargetTo())
+                .conversionRate(conversionResult.getInfo())
                 .operationDate(LocalDateTime.now())
                 .initialAmount(amount)
                 .totalResult(conversionResult.getConversationResult())

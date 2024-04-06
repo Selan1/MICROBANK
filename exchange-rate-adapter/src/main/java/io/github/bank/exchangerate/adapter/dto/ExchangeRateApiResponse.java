@@ -33,13 +33,22 @@ public class ExchangeRateApiResponse {
     @JsonProperty("base")
     private String baseCode;
 
-    @JsonProperty("target_code")
-    private String targetCode;
+    @JsonProperty("from")
+    private String targetFrom;
+
+    @JsonProperty("to")
+    private String targetTo;
+
+    @JsonProperty("info")
+    private Double info;
+
+    @JsonProperty("rate")
+    private Double rate;
 
     @JsonProperty("rates")
     private Double conversationRate;
 
-    @JsonProperty("conversion_result")
+    @JsonProperty("result")
     private Double conversationResult;
 
     @JsonProperty("conversion_rates")
