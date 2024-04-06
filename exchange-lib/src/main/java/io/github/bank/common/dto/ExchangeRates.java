@@ -17,8 +17,8 @@ import static com.fasterxml.jackson.annotation.JsonFormat.Shape.STRING;
 @AllArgsConstructor
 public class ExchangeRates {
 
-    @JsonFormat(shape = STRING, pattern = "yyyy-MM-dd")
-    private LocalDate rateDate;
+
+    private String rateDate;
     private String baseCurrency;
     private Map<String, Double> exchangeRates;
 }

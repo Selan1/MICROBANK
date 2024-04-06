@@ -10,10 +10,9 @@ import java.util.Map;
 @Builder
 public class ExchangeRateApiResponse {
 
-    private String result;
-    private String documentation;
+    private String success;
 
-    @JsonProperty("terms_of_use")
+    @JsonProperty("terms")
     private String termsOfUse;
 
     @JsonProperty("time_last_update_unix")
@@ -22,19 +21,16 @@ public class ExchangeRateApiResponse {
     @JsonProperty("time_next_update_unix")
     private Long nextUpdateUnix;
 
-    private Integer year;
+    @JsonProperty("date")
+    private String date;
 
-    private Integer month;
-
-    private Integer day;
-
-    @JsonProperty("base_code")
+    @JsonProperty("base")
     private String baseCode;
 
     @JsonProperty("target_code")
     private String targetCode;
 
-    @JsonProperty("conversion_rate")
+    @JsonProperty("rates")
     private Double conversationRate;
 
     @JsonProperty("conversion_result")

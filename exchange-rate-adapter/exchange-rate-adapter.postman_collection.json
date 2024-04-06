@@ -6,29 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "exchangerate-api get standart response",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "https://v6.exchangerate-api.com/v6/63a81d357cfb6de9f26cfed9/latest/USrD",
-					"protocol": "https",
-					"host": [
-						"v6",
-						"exchangerate-api",
-						"com"
-					],
-					"path": [
-						"v6",
-						"63a81d357cfb6de9f26cfed9",
-						"latest",
-						"USrD"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "adapter get actual",
 			"request": {
 				"method": "GET",
@@ -60,12 +37,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/exchange-rate/history?currency=USD",
+					"raw": "http://localhost:8081/exchange-rate/history?currency=USD",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"exchange-rate",
 						"history"
@@ -86,12 +63,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/exchange-rate/history?fromCurrency=RUB&toCurrency=USD&amount=100",
+					"raw": "http://localhost:8081/exchange-rate/history?fromCurrency=RUB&toCurrency=USD&amount=100",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8080",
+					"port": "8081",
 					"path": [
 						"exchange-rate",
 						"history"
