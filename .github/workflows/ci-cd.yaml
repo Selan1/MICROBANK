@@ -1,11 +1,12 @@
 name: CI/CD pipeline
 
+
 on:
   push:
     branches: ["master"]
 
 jobs:
-  build-test:
+  build-test-push:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,9 +21,6 @@ jobs:
   #      - name: Run tests with Gradle
   #        run: ./gradlew test
 
-  build-push-docker:
-    runs-on: ubuntu-latest
-    steps:
       - name: Build exchange-service image
         run: docker build . --file exchange-service/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/exchange-service:latest
       - name: Build exchange-rate-adapter image
