@@ -20,9 +20,9 @@ jobs:
         run: gradle  bootJar
 
       - name: Build exchange-service image
-        run: docker build . --file exchange-service/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/exchange-service:latest
+        run: docker build . --file exchange-service/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/selivanov-exchange-service:latest
       - name: Build exchange-rate-adapter image
-        run: docker build . --file exchange-rate-adapter/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/exchange-rate-adapter:latest
+        run: docker build . --file fx-rates-api-adapter/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/selivanov-fx-rates-api-adapter:latest
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
         with:
@@ -30,6 +30,6 @@ jobs:
           username: json_key
           password: ${{ secrets.YC_KEYS }}
       - name: Push exchange-service image
-        run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/exchange-service:latest
-      - name: Push exchange-rate-adapter image
-        run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/exchange-rate-adapter:latest
+        run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/selivanov-exchange-service:latest
+      - name: Push fx-rates-api-adapter image
+        run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/selivanov-fx-rates-api-adapter:latest
