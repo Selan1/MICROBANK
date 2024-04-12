@@ -1,5 +1,5 @@
 rootProject.name = 'bank-service'
 
 include 'exchange-service'
-include 'exchange-rate-adapter'
+include 'fx-rates-api-adapter'
 include 'exchange-lib'

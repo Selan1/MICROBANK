@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
 
 feign:
   client:
@@ -11,20 +11,9 @@ feign:
 
 adapter:
   client:
-    rate-adapter:
-      url: "http://localhost:8081/fx-rates-api"
-
-spring:
-  jpa:
-    show-sql: true
-  datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
-    driverClassName: org.postgresql.Driver
-  liquibase:
-    change-log: classpath:/db/changelog.yaml
-    enabled: true
+    fx-rates:
+      url: "https://api.fxratesapi.com"
+      api-key: "fxr_live_caae3d32b9d16deaa1b898fdc43d3e23b7d6"
 
 logbook:
   predicate:

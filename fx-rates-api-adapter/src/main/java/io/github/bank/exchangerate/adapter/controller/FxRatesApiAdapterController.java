@@ -1,8 +1,8 @@
-package io.github.bank.exchange.controller;
+package io.github.bank.exchangerate.adapter.controller;
 
 import io.github.bank.common.dto.ConversionResult;
 import io.github.bank.common.dto.ExchangeRates;
-import io.github.bank.exchange.service.ExchangeService;
+import io.github.bank.exchangerate.adapter.service.ExchangeRateAdapterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,11 @@ import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @RestController
 
-@RequestMapping("/exchange")
+@RequestMapping("/fx-rates-api")
 @RequiredArgsConstructor
-public class ExchangeController {
+public class FxRatesApiAdapterController {
 
-    private final ExchangeService rateAdapterService;
+    private final ExchangeRateAdapterService rateAdapterService;
 
     @GetMapping("/actual")
     public ExchangeRates getActualExchangeRate(@RequestParam String currency) {
@@ -29,9 +29,10 @@ public class ExchangeController {
     }
 
     @GetMapping("/history")
-    public ExchangeRates getHistoricalExchangeRate(@RequestParam String currency,
-                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate date) {
-        return rateAdapterService.getHistoricalRate(currency, date);
+    public List<ExchangeRates> getHistoricalExchangeRate(@RequestParam String currency,
+                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate dateFrom,
+                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate dateTo) {
+        return rateAdapterService.getHistoricalRates(currency, dateFrom, dateTo);
     }
 
     @GetMapping("/convert")

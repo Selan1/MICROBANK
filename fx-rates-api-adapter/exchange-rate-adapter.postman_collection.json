@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "88cd71d3-f335-4b60-bb88-58783f63f2b9",
+		"name": "exchange-rate-adapter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "exchangerate-api get standart response",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://v6.exchangerate-api.com/v6/63a81d357cfb6de9f26cfed9/latest/USrD",
+					"protocol": "https",
+					"host": [
+						"v6",
+						"exchangerate-api",
+						"com"
+					],
+					"path": [
+						"v6",
+						"63a81d357cfb6de9f26cfed9",
+						"latest",
+						"USrD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adapter get actual",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/exchange-rate/actual?currency=USD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"exchange-rate",
+						"actual"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adapter get history",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/exchange-rate/history?currency=USD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exchange-rate",
+						"history"
+					],
+					"query": [
+						{
+							"key": "currency",
+							"value": "USD"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adapter convert",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/exchange-rate/history?fromCurrency=RUB&toCurrency=USD&amount=100",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"exchange-rate",
+						"history"
+					],
+					"query": [
+						{
+							"key": "fromCurrency",
+							"value": "RUB"
+						},
+						{
+							"key": "toCurrency",
+							"value": "USD"
+						},
+						{
+							"key": "amount",
+							"value": "100"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
