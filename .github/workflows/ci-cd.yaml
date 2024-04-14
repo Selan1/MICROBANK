@@ -20,11 +20,13 @@ jobs:
         run: gradle  bootJar
 #      - name: Run tests with Gradle
 #        run: ./gradlew test
+
       # docker build
       - name: Build exchange-service image
         run: docker build . --file exchange-service/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/selivanov-exchange-service:latest
       - name: Build exchange-rate-adapter image
         run: docker build . --file fx-rates-api-adapter/Dockerfile --tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/selivanov-fx-rates-api-adapter:latest
+
       # docker push to yandex registry
       - name: Login to YC Registry
         uses: docker/login-action@v3.0.0
@@ -32,7 +34,18 @@ jobs:
           registry: cr.yandex
           username: json_key
           password: ${{ secrets.YC_KEYS }}
-      - name: Push exchange-service image
+      - name: Push exchange-service image to yandex registry
         run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/selivanov-exchange-service:latest
-      - name: Push fx-rates-api-adapter image
+      - name: Push fx-rates-api-adapter image to yandex registry
         run: docker push cr.yandex/${{ secrets.YC_REGISTRY_ID }}/selivanov-fx-rates-api-adapter:latest
+
+      # docker push to Docker Hub
+      - name: Login to DockerHub
+        uses: docker/login-action@v3.0.0
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Push exchange-service image to yandex registry
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-exchange-service:latest
+      - name: Push exchange-rate-adapter image to yandex registry
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-fx-rates-api-adapter:latest
