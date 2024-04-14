@@ -30,7 +30,7 @@ public class ExchangeController {
 
     @GetMapping("/history")
     public ExchangeRates getHistoricalExchangeRate(@RequestParam String currency,
-                                                         @RequestParam @DateTimeFormat(iso = DATE) LocalDate date) {
+                                                   @RequestParam @DateTimeFormat(iso = DATE) LocalDate date) {
         return rateAdapterService.getHistoricalRate(currency, date);
     }
 
