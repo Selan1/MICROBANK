@@ -45,7 +45,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Push exchange-service image to yandex registry
+      - name: Tag exchange-service image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-exchange-service:latest
-      - name: Push exchange-rate-adapter image to yandex registry
+      - name: Tag exchange-rate-adapter image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-fx-rates-api-adapter:latest
