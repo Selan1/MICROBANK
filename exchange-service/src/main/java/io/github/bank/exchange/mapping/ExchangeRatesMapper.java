@@ -6,6 +6,7 @@ import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
@@ -15,13 +16,13 @@ public class ExchangeRatesMapper {
 
     public static ExchangeRates fromUsdRateHistory(List<HistoryRate> historyRate, String currency, LocalDate date) {
         var usdRates = historyRate.stream()
-                .collect(toMap(rate -> rate.getCurrency(), rate -> rate.getUsdRate()));
+                .collect(toMap(HistoryRate::getCurrency, HistoryRate::getUsdRate));
 
         var currencyUsdRate = usdRates.get(currency);
         var multiplier = 1 / currencyUsdRate;
 
         var currencyRates = usdRates.entrySet().stream()
-                .collect(toMap(entry -> entry.getKey(), rate -> multiplier * rate.getValue()));
+                .collect(toMap(Map.Entry::getKey, rate -> multiplier * rate.getValue()));
 
         // usd -> rub
         // usd -> EUR
