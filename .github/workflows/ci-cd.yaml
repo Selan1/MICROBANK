@@ -55,3 +55,17 @@ jobs:
         run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-exchange-service:latest
       - name: Push exchange-rate-adapter image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-fx-rates-api-adapter:latest
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    needs: [ build-test-push ]
+    steps:
+      - name: Deploy serverless container
+        uses: yc-actions/yc-sls-container-deploy@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_KEYS }}
+          container-name: ${{ secrets.YC_CONTAINER_NAME }}
+          folder-id: ${{ secrets.YC_FOLDER_ID }}
+          revision-image-url: cr.yandex/${{ secrets.YC_REGISTRY_ID }}/selivanov-fx-rates-api-adapter:latest
+          revision-service-account-id: ${{ secrets.YC_SA_ID }}
