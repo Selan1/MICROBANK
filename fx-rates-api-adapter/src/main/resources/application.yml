@@ -15,6 +15,12 @@ adapter:
       url: "https://api.fxratesapi.com"
       api-key: "fxr_live_caae3d32b9d16deaa1b898fdc43d3e23b7d6"
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
+
 logbook:
   predicate:
     exclude:

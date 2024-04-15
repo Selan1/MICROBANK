@@ -12,19 +12,25 @@ feign:
 adapter:
   client:
     rate-adapter:
-      url: "http://localhost:8081/fx-rates-api"
+      url: ${RATE_ADAPTER_URL:http://localhost:8081/fx-rates-api}
 
 spring:
   jpa:
     show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
-    username: postgres
-    password: postgres
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/exchange-db}
+    username: ${DATABASE_USER:exchange-db-username}
+    password: ${DATABASE_PASS:exchange-db-password}
     driverClassName: org.postgresql.Driver
   liquibase:
     change-log: classpath:/db/changelog.yaml
     enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus
 
 logbook:
   predicate:

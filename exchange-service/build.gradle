@@ -8,7 +8,7 @@ plugins {
 group = 'io.github'
 version = 'master'
 sourceCompatibility = '11'
-mainClassName = 'io.github.bank.BankServiceApplication'
+mainClassName = 'io.github.bank.exchange.ExchangeApplication'
 
 dependencyManagement {
     imports {
