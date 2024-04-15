@@ -45,7 +45,13 @@ jobs:
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-      - name: Tag exchange-service image to docker hub
+
+      - name: Tag exchange-service image
+        run: docker tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/selivanov-exchange-service:latest ${{ secrets.DOCKER_USERNAME }}/selivanov-exchange-service:latest
+      - name: Tag exchange-rate-adapter image
+        run: docker tag cr.yandex/${{secrets.YC_REGISTRY_ID }}/selivanov-fx-rates-api-adapter:latest ${{ secrets.DOCKER_USERNAME }}/selivanov-fx-rates-api-adapter:latest
+
+      - name: Push exchange-service image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-exchange-service:latest
-      - name: Tag exchange-rate-adapter image to docker hub
+      - name: Push exchange-rate-adapter image to docker hub
         run: docker push ${{ secrets.DOCKER_USERNAME }}/selivanov-fx-rates-api-adapter:latest
