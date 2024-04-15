@@ -18,7 +18,7 @@ services:
     hostname: fx-rates-api-adapter
     image: selanandrew/selivanov-fx-rates-api-adapter:latest
     ports:
-      - "8081:8081"
+      - "8081:8080"
   postgres:
     container_name: postgres
     hostname: postgres

@@ -42,6 +42,7 @@ dependencies {
 
     compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
 }
 
 jar {
