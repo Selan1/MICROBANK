@@ -12,6 +12,4 @@ public class FxRatesApiAdapter {
         SpringApplication.run(FxRatesApiAdapter.class, args);
     }
 
-
-
 }
