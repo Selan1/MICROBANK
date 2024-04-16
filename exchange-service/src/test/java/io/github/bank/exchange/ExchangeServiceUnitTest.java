@@ -23,13 +23,14 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ExchangeServiceUnitTest {
-
+    // создаем заглушку адаптер клиента
     @Mock
     private RateAdapterClient rateAdapterClient;
-
+    //создает заглушку репозитория
     @Mock
     private RateHistoryDateRepository repository;
-
+    //позволяет внедрить заглушки в exchange service заменяя основные элементы что позволяет не затрагивать основную
+//программу
     @InjectMocks
     private ExchangeService exchangeService;
 
@@ -41,7 +42,7 @@ public class ExchangeServiceUnitTest {
                 .thenReturn(List.of(ExchangeRates.builder()
                         .baseCurrency("USD")
                         .rateDate(LocalDate.now())
-                        .exchangeRates(Map.of("USD", 1.0, "RUB", 92.00, "EUR", 0.95))
+                        .exchangeRates(Map.of("RUB", 92.00, "EUR", 0.95))
                         .build()));
 
         when(repository.saveAll(any())).thenReturn(
@@ -69,7 +70,8 @@ public class ExchangeServiceUnitTest {
     void getHistoricalRate() {
 
         var historicalResult = exchangeService.getHistoricalRate("EUR", LocalDate.now());
-
+//сравнивает текущую дату с датой, полученной из метода getRateDate() объекта historicalResult.
+// Метод должен вернуть true, если даты совпадают.
         assertEquals(LocalDate.now(), historicalResult.getRateDate());
         assertEquals("EUR", historicalResult.getBaseCurrency());
         assertEquals(3, historicalResult.getExchangeRates().entrySet().size());
