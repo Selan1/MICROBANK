@@ -33,6 +33,26 @@ services:
       - pg-data:/var/lib/postgresql/data
       - ./db:/docker-entrypoint-initdb.d
 
+  keycloak:
+    image: keycloak/keycloak
+    container_name: keycloak
+    command:
+      - start-dev
+    environment:
+      #      KEYCLOAK_DATABASE_VENDOR: postgress
+      #      KEYCLOAK_DATABASE_HOST: "host.docker.internal"
+      #      KC_DB_URL: "jdbc:postgresql://host.docker.internal:5432/exchange-db"
+      #      KC_DB_USERNAME: "exchange-db-username"
+      #      KC_DB_PASSWORD: "exchange-db-password"
+      KEYCLOAK_ADMIN: "admin"
+      KEYCLOAK_ADMIN_PASSWORD: "admin"
+    ports:
+      - "8484:8080"
+  #    depends_on:
+  #      - postgres
+  #    links:
+  #      - "postgres:postgres"
+
   # metrics
   prometheus:
     image: prom/prometheus:latest

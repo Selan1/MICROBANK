@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -19,6 +21,7 @@ import static org.springframework.format.annotation.DateTimeFormat.ISO.DATE;
 
 @RequestMapping("/exchange")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('exchange_user')")
 public class ExchangeController {
 
     private final ExchangeService rateAdapterService;

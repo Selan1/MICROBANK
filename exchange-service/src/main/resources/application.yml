@@ -26,11 +26,48 @@ spring:
     change-log: classpath:/db/changelog.yaml
     enabled: true
 
+#  security:
+#    oauth2:
+#      client:
+#        registration:
+#          keycloak:
+#            client-id: exchangeServiceId
+#            authorization-grant-type: authorization_code
+#            scope: openid
+#        provider:
+#          keycloak:
+#            issuer-uri: http://localhost:8484/realms/bank_realm
+#            user-name-attribute: preferred_username
+#      resourceserver:
+#        jwt:
+#          issuer-uri: http://localhost:8484/realms/bank_realm
+
+
+#keycloak:
+#  auth-server-url: http://localhost:8484
+#  realm: test_realm
+#  resource: exchange
+#  ssl-required: NONE
+#  credentials:
+#    secret: aXakJDhJBp2nmtgfjXbWJfYfajXiWdr3
+##  bearer-only: true
+
+spring.security.oauth2.client.registration.keycloak.client-id: login-app
+spring.security.oauth2.client.registration.keycloak.authorization-grant-type: authorization_code
+spring.security.oauth2.client.registration.keycloak.scope: openid
+spring.security.oauth2.client.provider.keycloak.issuer-uri: http://localhost:8484/realms/SpringBootKeycloak
+spring.security.oauth2.client.provider.keycloak.user-name-attribute: preferred_username
+spring.security.oauth2.resourceserver.jwt.issuer-uri: http://localhost:8484/realms/SpringBootKeycloak
+
 management:
   endpoints:
     web:
       exposure:
         include: health,prometheus
+
+logging:
+  level:
+    root: DEBUG
 
 logbook:
   predicate:
