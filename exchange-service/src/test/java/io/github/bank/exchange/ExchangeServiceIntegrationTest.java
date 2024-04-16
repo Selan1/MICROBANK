@@ -14,6 +14,8 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -33,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith({MockitoExtension.class})
 @WebAppConfiguration
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 @AutoConfigureTestDatabase
 @AutoConfigureEmbeddedDatabase
 public class ExchangeServiceIntegrationTest {
@@ -74,4 +76,11 @@ public class ExchangeServiceIntegrationTest {
         var savedHistory = repository.findAll();
         assertEquals(3, savedHistory.size());
     }
+
+    //security mocks
+    @MockBean
+    private JwtDecoder jwtDecoder;
+
+    @MockBean
+    private ClientRegistrationRepository clientRegistrationRepository;
 }

@@ -12,6 +12,7 @@ services:
       DATABASE_URL: "jdbc:postgresql://postgres:5432/exchange-db"
       DATABASE_USER: "exchange-db-username"
       DATABASE_PASS: "exchange-db-password"
+      ISSUER_URI: "http://host.docker.internal:8484/realms/SpringBootKeycloak"
 
   fx-rates-api-adapter:
     container_name: fx-rates-api-adapter
