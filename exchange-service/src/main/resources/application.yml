@@ -67,7 +67,7 @@ management:
 
 logging:
   level:
-    root: DEBUG
+    root: INFO
 
 logbook:
   predicate:
