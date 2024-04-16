@@ -8,8 +8,8 @@ services:
     ports:
       - "8080:8080"
     environment:
-      RATE_ADAPTER_URL: http://fx-rates-api-adapter:8081/fx-rates-api
-      DATABASE_URL: "jdbc:postgresql://capacity-plan-postgres:5432/capacity_plan_db"
+      RATE_ADAPTER_URL: http://host.docker.internal:8081/fx-rates-api
+      DATABASE_URL: "jdbc:postgresql://postgres:5432/exchange-db"
       DATABASE_USER: "exchange-db-username"
       DATABASE_PASS: "exchange-db-password"
 

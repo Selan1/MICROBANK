@@ -7,7 +7,7 @@ import lombok.experimental.UtilityClass;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-
+import org.apache.commons.math3.util.Precision;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
@@ -19,10 +19,10 @@ public class ExchangeRatesMapper {
                 .collect(toMap(HistoryRate::getCurrency, HistoryRate::getUsdRate));
 
         var currencyUsdRate = usdRates.get(currency);
-        var multiplier = 1 / currencyUsdRate;
+        var multiplier = 1.0 / currencyUsdRate;
 
         var currencyRates = usdRates.entrySet().stream()
-                .collect(toMap(Map.Entry::getKey, rate -> multiplier * rate.getValue()));
+                .collect(toMap(Map.Entry::getKey, rate -> Precision.round(multiplier * rate.getValue(), 2)));
 
         // usd -> rub
         // usd -> EUR
