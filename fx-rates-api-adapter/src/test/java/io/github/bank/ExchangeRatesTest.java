@@ -32,18 +32,20 @@ class ExchangeRatesTest {
     void testApiHistoricalRates() {
 
 
-        when(fxRatesApiClient.getHistoricalRates(202, any(), any()))
-                .thenReturn(FxRatesApiResponse.builder()
-                        .date(LocalDateTime.now())
-                        .base("USD")
-                        .rates(Map.of("EUR", 0.85))
-                        .build());
         when(fxRatesApiClient.getHistoricalRates(any(), any(), any()))
                 .thenReturn(FxRatesApiResponse.builder()
                         .date(LocalDateTime.now())
                         .base("USD")
                         .rates(Map.of("EUR", 0.85))
                         .build());
+
+        when(fxRatesApiClient.getHistoricalRates(any(), any(), any()))
+                .thenReturn(FxRatesApiResponse.builder()
+                        .date(LocalDateTime.now())
+                        .base("USD")
+                        .rates(Map.of("EUR", 0.85))
+                        .build());
+
         when(fxRatesApiClient.getHistoricalRates(any(), any(), any()))
                 .thenReturn(FxRatesApiResponse.builder()
                         .date(LocalDateTime.now())

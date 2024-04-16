@@ -16,6 +16,12 @@ dependencyManagement {
     }
 }
 
+configurations {
+    all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
+}
+
 dependencies {
 
     implementation project(":exchange-lib")
@@ -35,7 +41,11 @@ dependencies {
     implementation group: 'javax.validation', name: 'validation-api', version: '2.0.0.Final'
 
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-//    implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    implementation("org.springframework.boot:spring-boot-starter-log4j2")
+    implementation("org.apache.logging.log4j:log4j-spring-boot")
+//    implementation 'org.zalando:logbook-spring-boot-starter:3.8.0'
+
+
 
     implementation "com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:2.13.5"
     implementation "io.micrometer:micrometer-registry-prometheus"

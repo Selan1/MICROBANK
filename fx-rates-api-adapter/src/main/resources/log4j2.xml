@@ -1,0 +1,19 @@
+<Configuration>
+    <Appenders>
+        <Socket name="socket" host="host.docker.internal" port="5045">
+            <JsonLayout compact="true" eventEol="true" />
+        </Socket>
+        <Console name="console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n"/>
+        </Console>
+        <Async name="async">
+            <AppenderRef ref="socket"/>
+        </Async>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="async"/>
+            <AppenderRef ref="console"/>
+        </Root>
+    </Loggers>
+</Configuration>
