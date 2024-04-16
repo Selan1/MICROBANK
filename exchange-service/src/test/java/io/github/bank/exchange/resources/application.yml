@@ -1,0 +1,11 @@
+spring.main.allow-bean-definition-overriding: true
+
+spring:
+  liquibase:
+    change-log: classpath:/db/changelog.yaml
+
+zonky:
+  test:
+    database:
+      provider: zonky
+      type: postgres
