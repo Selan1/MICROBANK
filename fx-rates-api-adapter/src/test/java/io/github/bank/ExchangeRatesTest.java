@@ -1,23 +1,27 @@
 package io.github.bank;
 
-import io.github.bank.common.dto.ExchangeRates;
-import io.github.bank.exchangerate.adapter.client.FxRatesApiClient;
+
+import static org.junit.jupiter.api.Assertions.*;
+
 import io.github.bank.exchangerate.adapter.dto.FxRatesApiResponse;
-import io.github.bank.exchangerate.adapter.service.ExchangeRateAdapterService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
+import org.mockito.Mock;
+import java.time.LocalDate;
+
+import io.github.bank.exchangerate.adapter.client.FxRatesApiClient;
+import io.github.bank.common.dto.ExchangeRates;
+import io.github.bank.exchangerate.adapter.service.ExchangeRateAdapterService;
 
 
 @ExtendWith(MockitoExtension.class)
@@ -32,26 +36,29 @@ class ExchangeRatesTest {
     void testApiHistoricalRates() {
 
 
-        when(fxRatesApiClient.getHistoricalRates(any(), any(), any()))
+        when(fxRatesApiClient.getHistoricalRates(any(), any(), eq(LocalDate.of(2022,3,1))))
                 .thenReturn(FxRatesApiResponse.builder()
-                        .date(LocalDateTime.now())
+                        .date(LocalDateTime.of(2022,3,1,0,0))
                         .base("USD")
                         .rates(Map.of("EUR", 0.85))
                         .build());
 
-        when(fxRatesApiClient.getHistoricalRates(any(), any(), any()))
+
+        when(fxRatesApiClient.getHistoricalRates(any(), any(), eq(LocalDate.of(2022,3,2))))
                 .thenReturn(FxRatesApiResponse.builder()
-                        .date(LocalDateTime.now())
+                        .date(LocalDateTime.of(2022,3,2,0,0))
                         .base("USD")
-                        .rates(Map.of("EUR", 0.85))
+                        .rates(Map.of("EUR", 0.95))
                         .build());
 
-        when(fxRatesApiClient.getHistoricalRates(any(), any(), any()))
+
+        when(fxRatesApiClient.getHistoricalRates(any(), any(), eq(LocalDate.of(2022,3,3))))
                 .thenReturn(FxRatesApiResponse.builder()
-                        .date(LocalDateTime.now())
+                        .date(LocalDateTime.of(2022,3,3,0,0))
                         .base("USD")
-                        .rates(Map.of("EUR", 0.85))
+                        .rates(Map.of("EUR", 0.75))
                         .build());
+
 
 
 
