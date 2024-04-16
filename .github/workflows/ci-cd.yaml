@@ -19,7 +19,7 @@ jobs:
       - name: Build with Gradle
         run: gradle  bootJar
       - name: Run tests with Gradle
-        run: gradlew test
+        run: ./gradlew test
 
       # docker build
       - name: Build exchange-service image
